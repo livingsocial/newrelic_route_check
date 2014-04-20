@@ -24,7 +24,7 @@ module NewrelicRouteCheck
 
   def self.routes_diff_output(new_relic_controller_actions, formatted_routes_actions)
     puts "found #{new_relic_controller_actions.length} uniq new relic controller action hits"
-    puts "found #{formatted_routes_actions.length} uniq controller action pairs"
+    puts "found #{formatted_routes_actions.length} uniq Rails routes controller action pairs"
 
     only_new_relic = new_relic_controller_actions - formatted_routes_actions
     puts "exists in new relic, but not in routes: #{only_new_relic.length}"  
