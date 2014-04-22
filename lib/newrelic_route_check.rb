@@ -1,10 +1,11 @@
 require "newrelic_route_check/version"
+require "newrelic_route_check/railtie" if Rails::VERSION::MAJOR.to_i >= 3
 require "csv"
 
 module NewrelicRouteCheck
 
   def self.actions_from_routes
-    controller_actions = ::Rails::Application.routes.routes.inject({}) do |controller_actions, route|
+    controller_actions = application.routes.routes.inject({}) do |controller_actions, route|
       if route.requirements[:controller]
         (controller_actions[route.requirements[:controller]] ||= []) << route.requirements[:action]
       end
@@ -34,6 +35,16 @@ module NewrelicRouteCheck
     not_hit_in_new_relic = formatted_routes_actions - new_relic_controller_actions
     puts "never accessed in new relic stats: #{not_hit_in_new_relic.length}"
     puts not_hit_in_new_relic
+  end
+
+  private
+
+  def self.application
+    if Rails::VERSION::MAJOR.to_i >= 3
+      Rails.application
+    else
+      Rails::Application
+    end
   end
 
 end
