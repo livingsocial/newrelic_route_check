@@ -18,9 +18,16 @@ Or install it yourself as:
 
 ## Usage
 
-This gem requires you use New Relic to download your `controller_summary.csv` from the transaction history tab. Preferably with the 7 day history to have the best coverage. Download the file to `./tmp/controller_summary.csv` then you can run: `bundle exec rake newrelic:compare_with_routes`
+This gem requires the `controller_summary.csv` file from New Relic. To
+download, go to: Monitoring tab > Transactions.
 
-Which should give output of routes that are defined in your app but not receiving any traffic.
+Make sure to select these two options:
+1) Type: "Web".
+2) Date range: Preferably with the 7 day history to have the best coverage.
+
+Click on link "Show all transactions table…". Click on "Export as CSV". Save the file to `./tmp/controller_summary.csv`.
+
+Run: `bundle exec rake newrelic:compare_with_routes`, which should give output of routes that are defined in your app but not receiving any traffic.
 
 
 ## Contributing
