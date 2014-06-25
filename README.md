@@ -4,9 +4,15 @@ Compares New Relic controller_summary.csv to the routes defined in a Rails app
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile, likely in the development group as it is not needed in production:
 
     gem 'newrelic_route_check'
+    
+    #--- or
+
+    group :development do
+      gem 'newrelic_route_check'
+    end
 
 And then execute:
 
